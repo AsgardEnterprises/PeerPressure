@@ -1,0 +1,33 @@
+{
+  "name": "PeerPressure",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:AsgardEnterprises/PeerPressure.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AsgardEnterprises/PeerPressure/issues"
+  },
+  "homepage": "https://github.com/AsgardEnterprises/PeerPressure",
+  "dependencies": {
+    "jspm": "^0.16.0"
+  },
+  "jspm": {
+    "directories": {},
+    "dependencies": {
+      "react": "npm:react@^0.13.3"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.22",
+      "babel-runtime": "npm:babel-runtime@^5.8.20",
+      "core-js": "npm:core-js@^1.1.0"
+    }
+  }
+}
