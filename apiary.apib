@@ -1,0 +1,251 @@
+FORMAT: 1A
+HOST: http://peerpressure.herokuapp.com/
+
+# peerpressure
+
+Peer Pressure offers a RESTful API for pressuring your friends to better themselves. Shame them to progress. Show no mercy.
+
+They will show none to you.
+
+Apart from user registration and login, all requests are expected to have a JSON Web Token (JWT) in the Authorization header.
+
+
+## Login [/auth/]
+
+### Authenticate a user [POST]
+
++ Request (application/json)
+
+        {
+            "username": "TestUser"
+            "password" "password"
+        }
+    
+    
++ Response 200 (application/json)
+
+        {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"
+        }
+
+## Users [/users/]
+
+### Get current user data [GET]
+
+Fetches all the current publicly available data of a particular user.
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: "Bearer 1535315"
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": "1",
+                "email": "test1@testusers.com",
+                "Username": "TestUsername"
+                "fullName": "Test User"
+            }
+        ]
+
+### Register a new user [POST]
+
++ Request (application/json)
+
+        {
+            "username": "test",
+            "fullName": "TestUsername",
+            "email": "testuser1@testusers.com",
+            "password": "password"
+        }
+
++ Response 201 (application/json)
+
+        {
+            "token": "12345"
+        }
+        
+## Tasks [/users/tasks/]
+
+### Get current task [GET]
+
++ Request 
+        
+    + Headers
+    
+            Authorization: "Bearer 1535315"
+
++ Response 200 (application/json)
+        
+        {
+            "description": "Caffeinate harder, stronger, better, faster",
+            "last_completed": '2015-08-21',
+            "streak: 277"
+        }
+
+### Create new task [POST]
+Note: This will delete the previous task, if found.
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: "Bearer 1535315"
+    
+    + Body
+
+            {
+                "description": "Drink more booze"
+            }
+        
++ Response 200 (application/json)
+    
+
+### Mark a task as complete today [PUT]
+
+        
++ Response 200 (application/json)
+
+    + Headers
+    
+            Authorization: "Bearer 1535315"
+
+    + Body
+    
+            {
+                "description": "Drink more booze",
+                "last_completed: "21-08-2015",
+                "streak": 7
+            }
+
+
+### Delete a task [DELETE]
+
++ Request
+
+    + Headers
+    
+            Authorization: "Bearer 1535315"
+
++ Response 204
+            
+## Pairs [/users/pairs/]
+
+### Get all pairs [GET]
+
++ Request
+
+    + Headers
+    
+            Authorization: "Bearer 1535315"
+
++ Response 200 (application/json)
+
+        [
+             {
+                "name": "Test User2",
+                "email": "test2@testusers.com",
+                "is_confirmed": true
+             },
+             {
+                "name": "Test User3",
+                "email": "test3@testusers.com",
+                "is_confirmed": false
+             }
+        ]
+        
+### Create a new pair request [POST]
+
+Add a friend (pair) through knowing their email address.
+
++ Request (applicaiton/json) 
+
+    + Headers
+    
+            Authorization: "Bearer 1535315"
+            
+    + Body
+
+            {
+                "email": "test3@testusers.com#
+            }
+        
++ Response 201 (application/json)
+
+## Pair [/users/pairs/{pair_id}/]
+
+### Accept a pair request [PUT]
+Accept a friend (pairing) request sent to you
+
++ Request
+
+    + Headers
+    
+            Authorization: "Bearer 1535315"
+
++ Response 200 (application/json)
+
+
+### Destroy a pairing [DELETE]
+
++ Request
+
+    + Headers
+    
+            Authorization: "Bearer 1535315"
+
++ Response 204 (application/json)
+
+
+## Pair Tasks [/users/pairs/{pair_id}/tasks/]
+
+### Fetch the task and its state for friend (pair) [GET]
+
++ Request
+
+    + Headers
+    
+            Authorization: "Bearer 1535315"
+
++ Response 200 (application/json)
+
+        {
+            "description": "Eat all the things"
+            "last_completed: "2015-08-20"
+            "streak": 3
+        }
+
+
+        
+## Taunting [/users/pairs/{pair_id}/taunt/]
+
+### Taunt a friend [POST]
+
+Taunts will only be succesfully sent to fully confirmed peers who have not completed their daily task.
+
++ Request (application/json)
+
+        + Parameters
+            + pair_id (number) - ID of the pairing in the form of an integer
+            
+        + Headers
+    
+            Authorization: "Bearer 1535315"
+
+        + Body 
+        
+            {
+                "taunt": "Imma fuck you up bro, do your pushps"
+            }
+            
++ Response 200 (application/json)
+
+
+
+
+
+
+
