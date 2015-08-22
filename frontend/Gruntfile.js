@@ -4,7 +4,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     shell: {
       build: {
-        command: 'jspm bundle lib/index --inject'
+        command: 'jspm bundle lib/scripts/index.js build/index.js --inject && jspm bundle lib/scripts/login.jsx! build/login.js --inject'
       }
     },
 
@@ -35,13 +35,14 @@ module.exports = function(grunt) {
       },
       dev: {
         files: {
-          'build.css': 'lib/style/index.scss'
+          './build/index.css': './lib/style/index.scss',
+          './build/login.css': './lib/style/login.scss',
         }
       }
     },
 
     watch: {
-      files: ['./lib/*.js'],
+      files: ['./lib/**/*'],
       tasks: ['build', 'push_to_backend']
     },
   });
