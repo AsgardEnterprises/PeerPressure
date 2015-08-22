@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "postinstall": "node_modules/.bin/jspm install"
   },
   "repository": {
     "type": "git",

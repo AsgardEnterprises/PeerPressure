@@ -13,10 +13,10 @@ System.config({
     "npm:*": "jspm_packages/npm/*"
   },
   bundles: {
-    "build/index.js": [
-      "lib/scripts/index.js"
+    "frontend/build/index.js": [
+      "frontend/lib/scripts/index.js"
     ],
-    "build/login.js": [
+    "frontend/build/login.js": [
       "lib/scripts/login.jsx!github:floatdrop/plugin-jsx@1.1.0.js",
       "npm:react@0.13.3.js",
       "npm:react@0.13.3/react.js",
