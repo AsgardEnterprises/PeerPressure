@@ -1,5 +1,5 @@
-from application.services.crypto import hash_password
-from application.models.shared import db
+from services.crypto import hash_password
+from models.shared import db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)

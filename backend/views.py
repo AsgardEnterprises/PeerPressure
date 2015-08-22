@@ -1,13 +1,13 @@
 # app.py
-from flask import Flask, jsonify
-from flask_jwt import JWT, jwt_required, current_user
-from flask_sqlalchemy import SQLAlchemy
-from application.models.shared import db
-from application.models.user import User as User
-from application.services.crypto import hash_password
-
 import os
 
+from flask import Flask, jsonify, request
+
+from flask_jwt import JWT, jwt_required, current_user, generate_token
+
+from models.shared import db
+from models.user import User as User
+from services.crypto import hash_password
 
 app = Flask(__name__)
 
@@ -43,7 +43,22 @@ def load_user(payload):
 @app.route('/user')
 @jwt_required()
 def get_user():
-    return jsonify({'email': current_user.email, 'name': current_user.name })
+    return jsonify({'email': current_user.email.lower(), 'name': current_user.name })
+
+@app.route('/user', methods=['POST'])
+def create_user():
+    try:
+        user = User(name=request.json['username'], email=request.json['email'].lower(), password=request.json['password'])
+        db.session.add(user)
+        db.session.commit()
+        return jsonify({'token':generate_token(authenticate("a", "a"))})
+    except Exception as e:
+        return str(e)
+
+
+
+
+
 
 if __name__ == '__main__':
     app.run()

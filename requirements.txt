@@ -1,5 +1,5 @@
 Flask==0.10.1
-Flask-JWT==0.2.0
+-e git://github.com/mattupstate/flask-jwt@51486d4d259f36234a3c73423e37cf4eb628a1d3#egg=Flask_JWT-master
 Flask-SQLAlchemy==2.0
 itsdangerous==0.24
 Jinja2==2.8
