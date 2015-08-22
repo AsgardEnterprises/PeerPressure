@@ -14,7 +14,7 @@ System.config({
   },
   bundles: {
     "build.js": [
-      "lib/index.js"
+      "lib/scripts/index.js"
     ]
   },
 
