@@ -17,6 +17,17 @@ module.exports = function(grunt) {
       }
     },
 
+    sass: {
+      options: {
+        sourceMap: true
+      },
+      dev: {
+        files: {
+          'build.css': 'lib/style/index.scss'
+        }
+      }
+    },
+
     watch: {
       files: ['./lib/*.js'],
       tasks: ['shell:build']
@@ -24,7 +35,7 @@ module.exports = function(grunt) {
   });
 
 
-
-  grunt.registerTask('default', ['shell:build', 'connect:serve', 'watch']);
+  grunt.registerTask('build', ['shell:build', 'sass:dev']);
+  grunt.registerTask('default', ['build', 'connect:serve', 'watch']);
 
 };
