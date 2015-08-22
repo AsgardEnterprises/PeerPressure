@@ -24,7 +24,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: './build',
           src:  ['**/*'],
-          dest: '../backend/static'
+          dest: '../backend/application/static'
         }]
       }
     },

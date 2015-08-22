@@ -3,3 +3,4 @@ backend/static
 frontend/build
 frontend/node_modules
 frontend/jspm_packages
+backend/application/static
