@@ -23,13 +23,14 @@ module.exports = function(grunt) {
       },
       dev: {
         files: {
-          'build.css': 'lib/style/index.scss'
+          './index.css': './lib/style/index.scss',
+          './register.css': './lib/style/register.scss',
         }
       }
     },
 
     watch: {
-      files: ['./lib/*.js'],
+      files: ['./lib/**/*'],
       tasks: ['shell:build']
     },
   });
