@@ -1,6 +1,6 @@
 # app.py
-from flask import Flask
-from flask_jwt import JWT, jwt_required
+from flask import Flask, jsonify
+from flask_jwt import JWT, jwt_required, current_user
 from flask_sqlalchemy import SQLAlchemy
 from application.models.shared import db
 from application.models.user import User as User
@@ -10,6 +10,7 @@ import os
 
 
 app = Flask(__name__)
+
 app.debug = True
 app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
 app.config['SQLALCHEMY_DATABASE_URI']= os.environ['SQLALCHEMY_DATABASE_URI']
@@ -39,24 +40,10 @@ def load_user(payload):
     if payload['user_id']:
         return User.query.get(payload['user_id'])
 
-
-
-
-
-@app.route('/protected')
+@app.route('/user')
 @jwt_required()
-def protected():
-    return 'Success!'
-
-@app.route('/getdb/<email>')
-def getdb(email):
-    u = User('jonny', email, 'mypassword')
-    db.session.add(u)
-    db.session.commit()
-    return 'Success!'
-
-
-
+def get_user():
+    return jsonify({'email': current_user.email, 'name': current_user.name })
 
 if __name__ == '__main__':
     app.run()
