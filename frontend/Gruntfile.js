@@ -8,12 +8,24 @@ module.exports = function(grunt) {
       }
     },
 
-    connect: {
-      serve: {
-        options: {
-          port: 4000,
-          base: ['.']
-        }
+    copy: {
+      html: {
+        files: [
+          {
+            expand: true,
+            cwd:  '.',
+            src:  '*.html',
+            dest: 'build'
+          }
+        ]
+      },
+      backend: {
+        files: [{
+          expand: true,
+          cwd: './build',
+          src:  ['**/*'],
+          dest: '../backend/static'
+        }]
       }
     },
 
@@ -30,12 +42,12 @@ module.exports = function(grunt) {
 
     watch: {
       files: ['./lib/*.js'],
-      tasks: ['shell:build']
+      tasks: ['build', 'push_to_backend']
     },
   });
 
-
-  grunt.registerTask('build', ['shell:build', 'sass:dev']);
-  grunt.registerTask('default', ['build', 'connect:serve', 'watch']);
+  grunt.registerTask('build', ['shell:build', 'sass:dev', 'copy:html']);
+  grunt.registerTask('push_to_backend', ['copy:backend']);
+  grunt.registerTask('default', ['build', 'push_to_backend', 'watch']);
 
 };

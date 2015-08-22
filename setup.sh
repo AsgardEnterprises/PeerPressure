@@ -1,0 +1,1 @@
+cd frontend && ./setup.sh
