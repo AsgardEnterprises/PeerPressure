@@ -47,9 +47,16 @@ var RegisterForm = React.createClass({
 })
 
 var Form = React.createClass({
+  getInitialState: function() {
+      return { showLogin: true };
+  },
 
-  getForm: function() {
-    return(<LoginForm/>)
+  showRegister: function() {
+    this.setState({ showLogin: false });
+  },
+
+  showLogin: function() {
+    this.setState({ showLogin: true });
   },
 
   render: function() {
@@ -60,10 +67,10 @@ var Form = React.createClass({
             <div className={'panel-heading'}>
               <div className={'row'}>
                 <div className={'col-xs-6'}>
-                  <a href="#" className={'active'} id="login-form-link">Login</a>
+                  <input type="submit" value="Login" onClick={this.showLogin} className={this.state.showLogin ? 'toggle-form-button active' : 'toggle-form-button' }/>
                 </div>
                 <div clasName={'col-xs-6'}>
-                  <a href="#" id="register-form-link">Register</a>
+                  <input type="submit" value="Register" onClick={this.showRegister} className={this.state.showLogin ? 'toggle-form-button' : 'toggle-form-button active' }/>
                 </div>
               </div>
               <hr/>
@@ -71,10 +78,7 @@ var Form = React.createClass({
             <div className={'panel-body'}>
               <div className={'row'}>
                 <div className={'col-lg-12'}>
-
-                {this.getForm()}
-                  
-                  
+                {this.state.showLogin ? <LoginForm/> : <RegisterForm/>}
                 </div>
               </div>
             </div>
@@ -85,4 +89,4 @@ var Form = React.createClass({
   }
 });
 
-React.render(<div> <h1>Peer Pressure!</h1><Form/></div>, document.body);
+React.render(<div> <h1>Peer Pressure!</h1><Form /></div>, document.body);
