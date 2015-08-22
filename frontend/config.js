@@ -13,7 +13,7 @@ System.config({
     "npm:*": "jspm_packages/npm/*"
   },
   bundles: {
-    "build.js": [
+    "build/index.js": [
       "lib/scripts/index.js"
     ]
   },
