@@ -1,6 +1,7 @@
 from services.crypto import hash_password
 from models.shared import db
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True)
@@ -11,6 +12,9 @@ class User(db.Model):
         self.email = email.lower()
         self.name = name.lower()
         self.password = hash_password(password)
+
+    def verify_password(self, password):
+        return hash_password(password) == self.password
 
     def __repr__(self):
         return "<User {0} ({1})>".format(self.name, self.email)
