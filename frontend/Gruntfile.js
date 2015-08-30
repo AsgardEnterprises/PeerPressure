@@ -4,7 +4,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     shell: {
       build: {
-        command: 'jspm bundle lib/scripts/index.js build/index.js --inject && jspm bundle lib/scripts/login.jsx! build/login.js --inject'
+        command: 'jspm bundle lib/scripts/index.jsx! build/index.js --inject && jspm bundle lib/scripts/login.jsx! build/login.js --inject'
       }
     },
 
